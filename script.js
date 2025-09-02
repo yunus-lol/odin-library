@@ -16,17 +16,33 @@ function addBookToLibrary(name, author, pages, read) {
 let counter = 0
 
 function displayBooks() {
-  for (counter; counter < myLibrary.length; counter++) {
-    const card = document.querySelector(".card");
-    const content = document.createElement("div");
-    content.classList.add("card-content")
-    content.innerHTML = `
-      <h3 class="book-name">${myLibrary[counter].name}</h3>
-      <p class="book-info">Author: ${myLibrary[counter].author}</p>
-      <p class="book-info">Pages: ${myLibrary[counter].pages}</p>
-      <p class="book-info">Read: ${myLibrary[counter].read}</p>
-    `
-    card.appendChild(content)
+  document.addEventListener("DOMContentLoaded", () => {
+    for (counter; counter < myLibrary.length; counter++) {
+      const card = document.querySelector(".card");
+      const content = document.createElement("div");
+      content.classList.add("card-content")
+      content.dataset.id = myLibrary[counter].id;
+      content.innerHTML = `
+        <h3 class="book-name">${myLibrary[counter].name}</h3>
+        <p class="book-info">Author: ${myLibrary[counter].author}</p>
+        <p class="book-info">Pages: ${myLibrary[counter].pages}</p>
+        <p class="book-info">Read: ${myLibrary[counter].read}</p>
+        <button class="deleteButton">Delete</button>
+      `;
+
+      const deleteButton = content.querySelector(".deleteButton")
+      deleteButton.addEventListener("click", () => {
+        deleteBook(myLibrary[counter])
+      });
+      card.appendChild(content)
+    };
+  });
+}
+
+function deleteBook(id) {
+  if (id === content.getAttribute("data-id")) {
+    myLibrary.splice(myLibrary[counter], 1)
+    displayBooks()
   }
 }
 
@@ -36,10 +52,11 @@ addBookToLibrary("bob", "jeff", "3", "Read")
 addBookToLibrary("jeff", "jeff", "3", "Read")
 addBookToLibrary("jeff", "jeff", "3", "Read")
 
+displayBooks()
+
 console.log(myLibrary)
 
 const submitButton = document.querySelector(".submit");
-
 submitButton.addEventListener("click", (event) => {
   event.preventDefault()
   const title = document.querySelector("#title").value;
@@ -51,8 +68,6 @@ submitButton.addEventListener("click", (event) => {
   addBookToLibrary(title, author, pages, read);
   displayBooks()
 });
-
-displayBooks()
 
 const body = document.querySelector("body");
 const dialog = document.querySelector("dialog");
