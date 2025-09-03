@@ -38,11 +38,10 @@ function displayBooks() {
         displayBooks();
       }
     });
-    
-    card.appendChild(content)
-  };
-}
 
+    card.appendChild(content)
+  }
+}
 
 addBookToLibrary("bob", "jeff", "3", "Read")
 addBookToLibrary("jeff", "jeff", "3", "Not read")
