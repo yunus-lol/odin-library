@@ -18,11 +18,10 @@ function addBookToLibrary(name, author, pages, read) {
   displayBooks();
 }
 
-let counter = 0;
-
 function displayBooks() {
   const card = document.querySelector(".card");
-  for (counter; counter < myLibrary.length; counter++) {
+  card.innerHTML = ""
+  for (let counter = 0; counter < myLibrary.length; counter++) {
     const content = document.createElement("div");
     content.classList.add("card-content");
     content.dataset.id = myLibrary[counter].id;
@@ -54,7 +53,7 @@ function displayBooks() {
         if (myLibrary[x].id === content.getAttribute("data-id")) {
           myLibrary[x].toggleRead();
           displayBooks();
-        }
+        }     
       }
     });
 
